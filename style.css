@@ -1,0 +1,368 @@
+/* Reset básico */
+* {
+    margin: 0; /* Remove margens padrão do navegador */
+    padding: 0; /* Remove espaçamento interno padrão */
+    box-sizing: border-box; /* Inclui border e padding no cálculo de width/height */
+}
+
+/* Estilos para listas */
+ul, ol {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0; /* Remove padding padrão */
+    margin: 0; /* Remove margem padrão */
+    display: flex; /* Usa flexbox para organizar itens em linha */
+    flex-wrap: wrap; /* Permite quebra de linha em listas flexíveis */  
+    justify-content: center; /* Centraliza itens em listas flexíveis */
+    gap : 1rem; /* Espaçamento entre itens em listas flexíveis */
+}
+
+li {
+    margin: 0; /* Remove margem padrão dos itens */
+    padding: 0; /* Remove padding padrão dos itens */
+}
+
+/* Corpo da página */
+:root {
+    --bg: #000000;
+    --text: #FFFFFF;
+    --header: #121212;
+    --button-bg: #E50914;
+    --button-text: #FFFFFF;
+}
+
+body.light-theme {
+    --bg: #FFFFFF;
+    --text: #111111;
+    --header: #F7F7F7;
+    --button-bg: #1A1A1A;
+    --button-text: #FFFFFF;
+}
+
+body.light-theme section h2,
+body.light-theme .profile figcaption {
+    color: #333333; /* Texto mais escuro no modo light para título e legendas */
+}
+
+body.light-theme .profile img:hover {
+    border: 3px solid #000000; /* Borda preta ao passar mouse */
+}
+
+body.dark-theme {
+    --bg: #000000;
+    --text: #FFFFFF;
+    --header: #121212;
+    --button-bg: #E50914;
+    --button-text: #FFFFFF;
+}
+
+/* Em dark mode, mantém títulos e legendas brancos para contraste máximo */
+body.dark-theme section h2,
+body.dark-theme .profile figcaption {
+    color: #FFFFFF;
+}
+
+body {
+    background-color: var(--bg); /* Fundo baseado em tema */
+    color: var(--text); /* Texto baseado em tema */
+    font-family: 'Arial', sans-serif; /* Fonte legível e comum */
+    min-height: 100vh; /* Faz o body ocupar toda altura da janela */
+    display: flex; /* Usa flexbox para estruturar layout em coluna */
+    flex-direction: column; /* Alinha o conteúdo em coluna vertical */
+}
+
+/* Cabeçalho */
+header {
+    background-color: var(--header); /* Cor do header por tema */
+    padding: 20px; /* Espaço interno ao redor do conteúdo */
+}
+
+.header-content {
+    display: flex;
+    justify-content: center; /* Centraliza o título */
+    align-items: center;
+    position: relative;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+header h1 {
+    font-size: 3rem; /* Tamanho grande para destaque do título */
+    color: #E50914; /* Vermelho Netflix */
+    font-weight: bold; /* Texto em negrito */
+    text-align: center;
+    width: 100%;
+}
+
+#theme-toggle {
+    position: absolute;
+    right: 20px;
+}
+
+#theme-toggle {
+    width: 80px; /* Largura aumentada para elipse maior */
+    height: 36px; /* Altura mantida */
+    border: none;
+    border-radius: 999px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+    outline: none;
+}
+
+#theme-toggle::before {
+    content: '☾'; /* Lua no modo light */
+    position: absolute;
+    right: 8px; /* Fica fora do knob, no lado oposto */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    z-index: 1; /* Mantém acima do plano de fundo */
+}
+
+#theme-toggle::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%) translateX(0);
+    transition: transform 0.25s ease;
+    z-index: 0; /* Knob sob os ícones */
+}
+
+#theme-toggle[data-theme='dark']::before {
+    content: '☀'; /* Sol no modo dark */
+    left: 8px; /* Muda para lado esquerdo no dark, fora do knob em right */
+    right: auto;
+}
+
+#theme-toggle[data-theme='dark']::after {
+    transform: translateY(-50%) translateX(42px);
+}
+
+#theme-toggle:hover {
+    opacity: 0.9;
+}
+
+/* Conteúdo principal */
+main {
+    flex: 1; /* Faz o main crescer para ocupar espaço disponível */
+    display: flex; /* Flexbox para centralizar conteúdo */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 20px; /* Espaço interno */
+}
+
+section {
+    text-align: center; /* Centraliza texto dentro da seção */
+}
+
+section h2 {
+    font-size: 2rem; /* Tamanho do subtítulo */
+    margin-bottom: 40px; /* Espaço abaixo do título */
+    color: #FFFFFF; /* Texto em branco */
+}
+
+/* Lista de perfis */
+.profiles {
+    display: flex; /* Organiza grupos em linha */
+    justify-content: center; /* Centraliza a lista de grupos */
+    gap: 40px; /* Espaçamento entre grupos */
+    list-style: none; /* Remove marcadores de lista */
+    flex-wrap: wrap; /* Permite quebra de linha em telas menores */
+    flex-direction: column; /* Grupos empilhados verticalmente */
+    align-items: center; /* Centraliza grupos */
+}
+
+.group {
+    text-align: center; /* Centraliza conteúdo do grupo */
+    margin-bottom: 30px; /* Espaço entre grupos */
+}
+
+.profile-list {
+    display: flex; /* Organiza perfis em linha */
+    justify-content: center; /* Centraliza perfis */
+    gap: 20px; /* Espaçamento entre perfis */
+    list-style: none; /* Remove marcadores de lista ordenada */
+    flex-wrap: wrap; /* Permite quebra de linha */
+}
+
+.profile {
+    text-align: center; /* Centraliza conteúdo do item */
+    cursor: pointer; /* Cursor de clique para indicar interatividade */
+    transition: transform 0.3s ease; /* Animação suave no hover */
+}
+
+.profile a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.profile:hover {
+   transform: scale(1.2); /* Aumenta levemente ao passar o mouse */
+}
+
+.profile img {
+    width: 120px; /* Largura da imagem */
+    height: 120px; /* Altura fixa para manter formato */
+    border-radius: 50%; /* Torna a imagem redonda */
+    object-fit: cover; /* Corta para preencher mantendo proporção */
+}
+
+.profile img:hover {
+    border: 3px solid #FFFFFF; /* Borda branca ao passar mouse */
+}
+
+.profile figcaption {
+    margin-top: 10px; /* Espaço acima da legenda */
+    font-size: 1.2rem; /* Tamanho da fonte da legenda */
+    color: #FFFFFF; /* Texto em branco */
+}
+
+/* Responsividade */
+
+/* Dispositivos grandes (desktop a partir de 1024px) */
+@media (min-width: 1024px) {
+    header h1 {
+        font-size: 3.5rem; /* Título maior para telas grandes */
+    }
+
+    section h2 {
+        font-size: 2.2rem; /* Subtítulo maior */
+    }
+
+    .profiles {
+        flex-direction: row; /* Grupos lado a lado em desktop */
+        gap: 60px; /* Mais espaçamento entre grupos */
+    }
+
+    .profile-list {
+        gap: 4rem; /* Espaçamento entre perfis */
+    }
+
+    .profile img {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+/* Tablets e telas médias */
+@media (max-width: 1023px) and (min-width: 769px) {
+    header h1 {
+        font-size: 2.5rem; /* Título intermediário */
+    }
+
+    section h2 {
+        font-size: 1.8rem; /* Subtítulo intermediário */
+    }
+
+    .profiles {
+        flex-direction: column; /* Grupos empilhados em tablet */
+        gap: 40px;
+    }
+
+    .profile-list {
+        gap: 4rem; /* Espaçamento entre perfis aumentado para tablet */
+    }
+
+    .profile img {
+        width: 110px;
+        height: 110px;
+    }
+
+    /* Toggle mantido igual ao desktop */
+    #theme-toggle {
+        width: 85px;
+        height: 36px;
+    }
+
+    #theme-toggle[data-theme='dark']::after {
+        transform: translateY(-50%) translateX(42px);
+    }
+}
+
+/* Telefones e telas pequenas */
+@media (max-width: 900px) {
+    header h1 {
+        font-size: 2rem; /* Reduz título em telas menores */
+    }
+
+    section h2 {
+        font-size: 1.5rem; /* Reduz subtítulo em telas menores */
+    }
+
+    .profiles {
+        width: 100%;
+        justify-content: center; /* Mantém centralizado */
+    }
+
+    .profile-list {
+        display: grid; /* Faz os perfis quebrarem em uma grade */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 colunas */
+        gap: 4rem; /* Espaçamento entre itens aumentado */
+        justify-items: center; /* Centraliza itens da grade */
+        width: min(100%, 600px); /* Limite de largura para manter centralizado */
+        margin: 0 auto; /* Centraliza na tela */
+    }
+
+    .profile img {
+        width: 100px; /* Imagem menor em mobile */
+        height: 100px; /* Altura menor para manter círculo */
+    }
+
+    /* Toggle mantido igual ao desktop */
+    #theme-toggle {
+        width: 85px;
+        height: 36px;
+    }
+
+    #theme-toggle[data-theme='dark']::after {
+        transform: translateY(-50%) translateX(42px);
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 15px; /* Padding reduzido para mobile */
+    }
+
+    header h1 {
+        font-size: 1.7rem;
+    }
+
+    section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+
+    .profiles {
+        gap: 20px;
+    }
+
+    .profile-list {
+        flex-direction: column; /* Perfis empilhados verticalmente em telas muito pequenas */
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .profile img {
+        width: 90px;
+        height: 90px;
+    }
+
+    /* Toggle mantido igual ao desktop */
+    #theme-toggle {
+        width: 95px;
+        height: 36px;
+    }
+
+    #theme-toggle[data-theme='dark']::after {
+        transform: translateY(-50%) translateX(42px);
+    }
+}
